@@ -1,3 +1,13 @@
+import { Button } from "@/components/ui/button";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { Loader } from "lucide-react";
 import Image from "next/image";
 
 export function Header() {
@@ -15,6 +25,27 @@ export function Header() {
             Lingo
           </h1>
         </div>
+        <ClerkLoading>
+          <Loader className="w-5 h-5 text-muted-foreground animate-spin" />
+        </ClerkLoading>
+
+        <ClerkLoaded>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+
+          <SignedOut>
+            <SignInButton
+              mode="modal"
+              afterSignInUrl="/learn"
+              afterSignUpUrl="/learn"
+            >
+              <Button size="lg" variant="ghost">
+                Login
+              </Button>
+            </SignInButton>
+          </SignedOut>
+        </ClerkLoaded>
       </div>
     </header>
   );
