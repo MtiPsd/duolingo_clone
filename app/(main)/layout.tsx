@@ -1,4 +1,4 @@
-import { MobileHeader } from "@/components/mobile-header";
+import { MobileHeader } from "@/components/mobile_header";
 import { Sidebar } from "@/components/sidebar";
 
 type Props = {

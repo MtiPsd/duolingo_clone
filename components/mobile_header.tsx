@@ -1,4 +1,4 @@
-import { MobileSidebar } from "@/components/mobile.sidebar";
+import { MobileSidebar } from "@/components/mobile_sidebar";
 
 export function MobileHeader() {
   return (
