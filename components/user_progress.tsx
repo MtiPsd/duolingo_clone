@@ -10,7 +10,7 @@ type Props = {
   hasActiveSubscription: boolean;
 };
 
-function UserProgress({
+export function UserProgress({
   activeCourse,
   hasActiveSubscription,
   hearts,
@@ -62,5 +62,3 @@ function UserProgress({
     </div>
   );
 }
-
-export default UserProgress;
