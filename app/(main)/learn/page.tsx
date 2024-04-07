@@ -17,7 +17,7 @@ function LearnPage() {
       <FeedWrapper>
         <Header title="Spanish" />
         <div className="space-y-4">
-          <div className="h-[700px] bg-blue-500 w-full"></div>
+          {/* <div className="h-[700px] bg-blue-500 w-full"></div> */}
         </div>
       </FeedWrapper>
     </div>
