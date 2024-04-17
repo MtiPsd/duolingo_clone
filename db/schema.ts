@@ -38,7 +38,7 @@ export const unitsRelations = relations(units, ({ many, one }) => ({
     fields: [units.courseId],
     references: [courses.id],
   }),
-  units: many(lessons),
+  lessons: many(lessons),
 }));
 
 ////////////////////////////////////
@@ -98,7 +98,6 @@ export const challengeOptions = pgTable("challenge_options", {
   challengeId: integer("challenge_id")
     .references(() => challenges.id, { onDelete: "cascade" })
     .notNull(),
-  type: challengesEnums("type").notNull(),
   text: text("text").notNull(),
   correct: boolean("correct").notNull(),
   imageSrc: text("image_src"),
