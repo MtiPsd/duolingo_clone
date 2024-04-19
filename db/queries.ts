@@ -2,11 +2,56 @@ import { cache } from "react";
 import db from "@/db/drizzle";
 import { auth } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
-import { courses, userProgress } from "@/db/schema";
+import { courses, units, userProgress } from "@/db/schema";
 
 export const getCourses = cache(async () => {
   const data = await db.query.courses.findMany();
   return data;
+});
+
+export const getUnits = cache(async () => {
+  const userProgress = await getUserProgress();
+
+  if (!userProgress?.activeCourseId) {
+    return [];
+  }
+
+  const data = await db.query.units.findMany({
+    where: eq(units.courseId, userProgress.activeCourseId),
+    //  populate
+    with: {
+      lessons: {
+        with: {
+          challenges: {
+            with: {
+              challengeProgress: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  // simplifying data so we don't need heavy calculation on the front end
+  const simplifiedData = data.map(unit => {
+    const lessonsWithCompletedStatus = unit.lessons.map(lesson => {
+      const allChallengesCompleted = lesson.challenges.every(
+        challenge => {
+          return (
+            challenge.challengeProgress &&
+            challenge.challengeProgress.length > 0 &&
+            challenge.challengeProgress.every(
+              progress => progress.completed,
+            )
+          );
+        },
+      );
+      return { ...lesson, completed: allChallengesCompleted };
+    });
+    return { ...unit, lesson: lessonsWithCompletedStatus };
+  });
+
+  return simplifiedData;
 });
 
 export const getUserProgress = cache(async () => {
