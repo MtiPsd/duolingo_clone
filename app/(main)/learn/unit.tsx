@@ -1,5 +1,6 @@
 import { lessons, units } from "@/db/schema";
 import UnitBanner from "./unit_banner";
+import LessonButton from "./lesson_button";
 
 type Props = {
   id: number;
@@ -32,7 +33,17 @@ function Unit({
           const isCurrent = lesson.id === activeLesson?.id;
           const isLocked = !lesson.completed && !isCurrent;
 
-          return <LessonButton />;
+          return (
+            <LessonButton
+              key={lesson.id}
+              id={lesson.id}
+              index={index}
+              totalCount={lessons.length - 1}
+              current={isCurrent}
+              locked={isLocked}
+              percentage={activeLessonPercentage}
+            />
+          );
         })}
       </div>
     </>
