@@ -57,7 +57,7 @@ export const getUnits = cache(async () => {
       );
       return { ...lesson, completed: allChallengesCompleted };
     });
-    return { ...unit, lesson: lessonsWithCompletedStatus };
+    return { ...unit, lessons: lessonsWithCompletedStatus };
   });
 
   return simplifiedData;
