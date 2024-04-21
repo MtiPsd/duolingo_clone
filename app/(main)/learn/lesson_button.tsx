@@ -16,7 +16,7 @@ type Props = {
   percentage: number;
 };
 
-function LessonButton({
+export function LessonButton({
   id,
   index,
   percentage,
@@ -117,5 +117,3 @@ function LessonButton({
     </Link>
   );
 }
-
-export default LessonButton;
