@@ -2,20 +2,34 @@ import { FeedWrapper } from "@/components/feed_wrapper";
 import { StickyWrapper } from "@/components/sticky_wrapper";
 import { UserProgress } from "@/components/user_progress";
 import { Header } from "./header";
-import { getUnits, getUserProgress } from "@/db/queries";
+import {
+  getCourseProgress,
+  getLessonPercentage,
+  getUnits,
+  getUserProgress,
+} from "@/db/queries";
 import { redirect } from "next/navigation";
 import Unit from "./unit";
 
 async function LearnPage() {
   const userProgressPromise = getUserProgress();
+  const courseProgressPromise = getCourseProgress();
+  const lessonPercentagePromise = getLessonPercentage();
   const unitsPromise = getUnits();
 
-  const [userProgress, units] = await Promise.all([
-    userProgressPromise,
-    unitsPromise,
-  ]);
+  const [userProgress, units, courseProgress, lessonPercentage] =
+    await Promise.all([
+      userProgressPromise,
+      unitsPromise,
+      courseProgressPromise,
+      lessonPercentagePromise,
+    ]);
 
   if (!userProgress || !userProgress.activeCourse) {
+    redirect("/courses");
+  }
+
+  if (!courseProgress) {
     redirect("/courses");
   }
 
@@ -39,8 +53,8 @@ async function LearnPage() {
               description={unit.description}
               title={unit.title}
               lessons={unit.lessons}
-              activeLesson={undefined}
-              activeLessonPercentage={0}
+              activeLesson={courseProgress.activeLesson}
+              activeLessonPercentage={lessonPercentage}
             />
           </div>
         ))}
