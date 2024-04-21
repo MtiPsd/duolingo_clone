@@ -1,6 +1,6 @@
 import { lessons, units } from "@/db/schema";
-import UnitBanner from "./unit_banner";
-import LessonButton from "./lesson_button";
+import { UnitBanner } from "./unit_banner";
+import { LessonButton } from "./lesson_button";
 
 type Props = {
   id: number;
@@ -16,7 +16,7 @@ type Props = {
   activeLessonPercentage: number;
 };
 
-function Unit({
+export function Unit({
   id,
   order,
   title,
@@ -49,5 +49,3 @@ function Unit({
     </>
   );
 }
-
-export default Unit;

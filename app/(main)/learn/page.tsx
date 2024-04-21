@@ -9,7 +9,7 @@ import {
   getUserProgress,
 } from "@/db/queries";
 import { redirect } from "next/navigation";
-import Unit from "./unit";
+import { Unit } from "./unit";
 
 async function LearnPage() {
   const userProgressPromise = getUserProgress();
