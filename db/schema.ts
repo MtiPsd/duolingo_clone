@@ -67,7 +67,7 @@ export const lessonsRelations = relations(
 
 ////////////////////////////////////
 
-export const challengesEnums = pgEnum("type", ["SELECT", "ASSISTS"]);
+export const challengesEnums = pgEnum("type", ["SELECT", "ASSIST"]);
 
 export const challenges = pgTable("challenges", {
   id: serial("id").primaryKey(),
