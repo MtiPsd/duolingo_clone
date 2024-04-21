@@ -46,6 +46,10 @@ export const getUnits = cache(async () => {
   // simplifying data so we don't need heavy calculation on the front end
   const simplifiedData = data.map(unit => {
     const lessonsWithCompletedStatus = unit.lessons.map(lesson => {
+      if (lesson.challenges.length === 0) {
+        return { ...lesson, completed: false };
+      }
+
       const allChallengesCompleted = lesson.challenges.every(
         challenge => {
           return (
