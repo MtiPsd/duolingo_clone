@@ -38,7 +38,7 @@ export function Challenge({
           selected={selectedOption === option.id}
           onClick={() => onSelect(option.id)}
           status={status}
-          audioStc={option.audioSrc}
+          audioSrc={option.audioSrc}
           disabled={disabled}
           type={type}
         />
