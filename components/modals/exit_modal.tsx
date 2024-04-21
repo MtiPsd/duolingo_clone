@@ -64,6 +64,10 @@ export function ExitModal() {
               size="lg"
               variant="dangerOutline"
               className="w-full"
+              onClick={() => {
+                close();
+                router.push("/learn");
+              }}
             >
               End session
             </Button>
