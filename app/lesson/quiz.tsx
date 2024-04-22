@@ -8,6 +8,7 @@ import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/actions/challenge_progress";
 import { toast } from "sonner";
+import { reduceHearts } from "@/actions/user_progress";
 
 type Props = {
   initialLessonId: number;
@@ -103,7 +104,24 @@ export function Quiz({
           );
       });
     } else {
-      console.error("Incorrect option!");
+      startTransition(() => {
+        reduceHearts(currentChallenge.id)
+          .then(res => {
+            if (res?.error === "hearts") {
+              console.error("Missing hearts");
+              return;
+            }
+
+            setStatus("wrong");
+
+            if (!res?.error) {
+              setHearts(prev => Math.max(prev - 1, 0));
+            }
+          })
+          .catch(() =>
+            toast.error("Something went wrong. Please try again"),
+          );
+      });
     }
   }
 
