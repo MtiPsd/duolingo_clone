@@ -1,7 +1,7 @@
 "use client";
 
 import { challengeOptions, challenges } from "@/db/schema";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Header } from "./header";
 import { QuestionBubble } from "./question_bubble";
 import { Challenge } from "./challenge";
@@ -52,6 +52,37 @@ export function Quiz({
     setSelectedOption(id);
   }
 
+  function onNext() {
+    setActiveIndex(current => current + 1);
+  }
+
+  function onContinue() {
+    if (!selectedOption) return;
+
+    if (status === "wrong") {
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    if (status === "correct") {
+      onNext();
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    const correctOption = options.find(option => option.correct);
+
+    if (!correctOption) return;
+
+    if (correctOption.id === selectedOption) {
+      console.log("Correct option!");
+    } else {
+      console.error("Incorrect option!");
+    }
+  }
+
   return (
     <>
       <Header
@@ -85,7 +116,7 @@ export function Quiz({
       <Footer
         disabled={!selectedOption}
         status={status}
-        onCheck={() => {}}
+        onCheck={onContinue}
       />
     </>
   );
