@@ -6,6 +6,8 @@ import { Header } from "./header";
 import { QuestionBubble } from "./question_bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
+import { upsertChallengeProgress } from "@/actions/challenge_progress";
+import { toast } from "sonner";
 
 type Props = {
   initialLessonId: number;
@@ -25,6 +27,8 @@ export function Quiz({
   initialPercentage,
   userSubscription,
 }: Props) {
+  const [isPending, startTransition] = useTransition();
+
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(initialPercentage);
   const [challenges] = useState(initialLessonChallenges);
@@ -77,7 +81,27 @@ export function Quiz({
     if (!correctOption) return;
 
     if (correctOption.id === selectedOption) {
-      console.log("Correct option!");
+      startTransition(() => {
+        upsertChallengeProgress(currentChallenge.id)
+          .then(res => {
+            if (res?.error === "hearts") {
+              // TODO: Show a modal for this situation
+              console.error("Missing hearts");
+              return;
+            }
+
+            setStatus("correct");
+            setPercentage(prev => prev + 100 / challenges.length);
+
+            // This is a practice
+            if (initialPercentage === 100) {
+              setHearts(prev => Math.min(prev + 1, 5));
+            }
+          })
+          .catch(() =>
+            toast.error("Something went wrong. Please try again"),
+          );
+      });
     } else {
       console.error("Incorrect option!");
     }

@@ -42,12 +42,9 @@ export async function upsertChallengeProgress(challengeId: number) {
       ),
     });
 
-  if (!currentChallengeProgress) {
-    throw new Error("Couldn't find the current challenge progress");
-  }
-
   // is this practice or first time ?
-  const isPractice = Boolean(currentChallengeProgress);
+  // TODO: Boolean vs !! ?
+  const isPractice = !!currentChallengeProgress;
 
   // TODO: Not if user has a subscription
   if (currentUserProgress.hearts === 0 && !isPractice) {
