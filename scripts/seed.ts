@@ -108,6 +108,30 @@ async function main() {
       },
     ]);
 
+    await db.insert(schema.challenges).values([
+      {
+        id: 4,
+        lessonId: 2, // Verbs
+        order: 1,
+        question: 'Which one of these is "the man"?',
+        type: "SELECT",
+      },
+      {
+        id: 5,
+        lessonId: 2, // Verbs
+        order: 2,
+        question: '"the man"',
+        type: "ASSIST",
+      },
+      {
+        id: 6,
+        lessonId: 2, // Verbs
+        order: 3,
+        question: 'Which one of these is "the robot"?',
+        type: "SELECT",
+      },
+    ]);
+
     await db.insert(schema.challengeOptions).values([
       {
         challengeId: 1, // Which one of these is "the man"?
