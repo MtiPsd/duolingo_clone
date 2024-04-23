@@ -52,6 +52,11 @@ export function Quiz({
   );
 
   const currentChallenge = challenges[activeIndex];
+
+  if (!currentChallenge) {
+    return <div>Finished the challenge</div>;
+  }
+
   const options = currentChallenge?.challengeOptions || [];
   const title =
     currentChallenge.type === "ASSIST"
