@@ -14,6 +14,7 @@ import { useAudio, useWindowSize } from "react-use";
 import Image from "next/image";
 import { ResultCard } from "./result_card";
 import { useRouter } from "next/navigation";
+import { useHeartsModal } from "@/store/use_hearts_modal";
 
 type Props = {
   initialLessonId: number;
@@ -33,6 +34,7 @@ export function Quiz({
   initialPercentage,
   userSubscription,
 }: Props) {
+  const { open: openHeartsModal } = useHeartsModal();
   const router = useRouter();
   const { width, height } = useWindowSize();
   const [finishAudio] = useAudio({
@@ -152,8 +154,7 @@ export function Quiz({
         upsertChallengeProgress(currentChallenge.id)
           .then(res => {
             if (res?.error === "hearts") {
-              // TODO: Show a modal for this situation
-              console.error("Missing hearts");
+              openHeartsModal();
               return;
             }
 
@@ -175,7 +176,7 @@ export function Quiz({
         reduceHearts(currentChallenge.id)
           .then(res => {
             if (res?.error === "hearts") {
-              console.error("Missing hearts");
+              openHeartsModal();
               return;
             }
 
