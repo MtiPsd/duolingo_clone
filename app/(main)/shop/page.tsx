@@ -14,6 +14,8 @@ async function ShopPage() {
     userSubscriptionPromise,
   ]);
 
+  const isPro = !!userSubscription?.isActive;
+
   if (!userProgress || !userProgress.activeCourse) {
     redirect("/courses");
   }
@@ -25,7 +27,7 @@ async function ShopPage() {
           activeCourse={userProgress.activeCourse}
           hearts={userProgress.hearts}
           points={userProgress.points}
-          hasActiveSubscription={false} // TODO: ADD subscription later
+          hasActiveSubscription={isPro}
         />
       </StickyWrapper>
       <FeedWrapper>
@@ -40,7 +42,7 @@ async function ShopPage() {
           <Items
             hearts={userProgress.hearts}
             points={userProgress.points}
-            hasActiveSubscription={false} // TODO: ADD subscription later
+            hasActiveSubscription={isPro}
           />
         </div>
       </FeedWrapper>
