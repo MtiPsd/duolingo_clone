@@ -1,14 +1,18 @@
 import { FeedWrapper } from "@/components/feed_wrapper";
 import { StickyWrapper } from "@/components/sticky_wrapper";
 import { UserProgress } from "@/components/user_progress";
-import { getUserProgress } from "@/db/queries";
+import { getUserProgress, getUserSubscription } from "@/db/queries";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { Items } from "./items";
 
 async function ShopPage() {
   const userProgressPromise = getUserProgress();
-  const [userProgress] = await Promise.all([userProgressPromise]);
+  const userSubscriptionPromise = getUserSubscription();
+  const [userProgress, userSubscription] = await Promise.all([
+    userProgressPromise,
+    userSubscriptionPromise,
+  ]);
 
   if (!userProgress || !userProgress.activeCourse) {
     redirect("/courses");
