@@ -10,6 +10,8 @@ import {
 } from "@/db/queries";
 import { redirect } from "next/navigation";
 import { Unit } from "./unit";
+import { Promo } from "@/components/promo";
+import { Quests } from "@/components/quests";
 
 async function LearnPage() {
   const userProgressPromise = getUserProgress();
@@ -42,7 +44,10 @@ async function LearnPage() {
           points={userProgress.points}
           hasActiveSubscription={false}
         />
+        <Promo />
+        <Quests points={userProgress.points} />
       </StickyWrapper>
+
       <FeedWrapper>
         <Header title={userProgress.activeCourse.title} />
         {units.map(unit => (
