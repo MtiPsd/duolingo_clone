@@ -14,6 +14,8 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Promo } from "@/components/promo";
+import { Quests } from "@/components/quests";
 
 async function LeaderboardPage() {
   const userProgressPromise = getUserProgress();
@@ -41,6 +43,8 @@ async function LeaderboardPage() {
           points={userProgress.points}
           hasActiveSubscription={isPro}
         />
+        <Promo />
+        <Quests points={userProgress.points} />
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">
