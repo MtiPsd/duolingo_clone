@@ -1,8 +1,10 @@
-# Duolingo Clone
+![mascot](https://github.com/MtiPsd/duolingo_clone/assets/95580073/ea62b21a-83ba-4682-90d6-e5b434e52f86)# Duolingo Clone
 
 This project is a Duolingo clone website built with Next.js, TypeScript, and Tailwind CSS. It aims to provide a simplified version of the popular language learning platform.
 
-![Logo (main)](https://github.com/MtiPsd/duolingo_clone/assets/95580073/6aa0f01d-84e2-47a1-a303-04a879001b90)
+
+![mascot](https://github.com/MtiPsd/duolingo_clone/assets/95580073/19b18f39-d775-43c6-9654-eb816933bb3f)
+
 
 
 ## Table of Contents
