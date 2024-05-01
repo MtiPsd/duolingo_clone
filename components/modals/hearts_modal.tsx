@@ -30,7 +30,7 @@ export function HeartsModal() {
 
   function onClick() {
     close();
-    router.push("/store");
+    router.push("/shop");
   }
 
   return (
