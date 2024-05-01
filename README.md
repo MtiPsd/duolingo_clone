@@ -59,6 +59,12 @@ The Duolingo clone project includes the following features:
 
 A demo of the Duolingo clone project is available online. You can watch the demo [here](https://lingo-app.netlify.app/).
 
+
+
+https://github.com/MtiPsd/duolingo_clone/assets/95580073/612fa923-d4eb-4deb-b3e3-73f65cf4be92
+
+
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
