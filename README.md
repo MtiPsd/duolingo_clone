@@ -13,8 +13,7 @@ This project is a Duolingo clone website built with Next.js, TypeScript, and Tai
 2. [Usage](#usage)
 3. [Features](#features)
 4. [Project Demo](#project-demo)
-5. [Repository](#repository)
-6. [License](#license)
+5. [License](#license)
 
 ## Installation
 
